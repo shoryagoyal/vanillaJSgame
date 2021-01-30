@@ -5,10 +5,10 @@ var playerChoice = 0;
 var playerScore = 0;
 var computerScore = 0;
 stone.onclick = function(){
-    console.log("stone button clicked");
+    console.log("stone button clicked");//no console logs
     playerChoice = 0;
     document.getElementById("playerOptionImage").src =  "stone.jpeg";
-    computerKaFaisla();
+    computerKaFaisla();//computer's move
 }
 paper.onclick = function(){
     console.log("paper button clicked");
@@ -22,14 +22,14 @@ scissor.onclick = function(){
     document.getElementById("playerOptionImage").src =  "scissor.jpeg";
     computerKaFaisla();
 }
-var computerkiChoice;
+var computerkiChoice;//poor naming
 function computerKaFaisla(){
     var randomNumber = (parseInt(Math.random()*1000))%3;
     console.log("this is our random Number="+randomNumber);
-    if(randomNumber==0){
+    if(randomNumber===0){
         document.getElementById("computerOptionImage").src = "stone.jpeg";
     }
-    else if(randomNumber==1){
+    else if(randomNumber===1){
         document.getElementById("computerOptionImage").src = "paper.jpeg";
     }
     else document.getElementById("computerOptionImage").src = "scissor.jpeg";
@@ -37,7 +37,7 @@ function computerKaFaisla(){
     result();
 }
 function result(){
-    if(playerChoice==computerkiChoice){
+    if(playerChoice === computerkiChoice){
         console.log("draw hogaya");
     }
     else{
@@ -73,6 +73,6 @@ function result(){
     }
 }
 function newGame(){
-    if(playerScore==5) location.replace("redirectWonStone.html");
-    else location.replace("redecLooseStone.html")
+    if(playerScore==5) location.replace("redirectIfWin.html");
+    else location.replace("redirectIfLose.html")
 }
