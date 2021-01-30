@@ -73,6 +73,6 @@ function result(){
     }
 }
 function newGame(){
-    if(playerScore==5) location.replace("redirectIfWin.html");
+    if(playerScore==5) location.replace("redirectifWin.html");
     else location.replace("redirectIfLose.html")
 }
