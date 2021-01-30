@@ -92,91 +92,43 @@ for(index = 0;index < lengthOfString; index++){
     userString += "_";
 }
 function checkForCharacter(characterGuessed) {
-    if(arrayOfCount[characterGuessed-65] === 1) {
-        return;
-    }
     arrayOfCount[characterGuessed-65]++;
-    chancesUsed++;
-    //console.log("character Guessed: " + characterGuessed);
-    if (chancesUsed > 6) {
-        location.replace("redirectIfLose.html");
-    }
-    let noMatch = false;
-    
-    for(let index=0; index<lengthOfString; index++) {
-        if (resultString.charCodeAt(index) === characterGuessed) {
-            console.log(String.fromCharCode(characterGuessed));
-            userString = userString.replaceAt(index, String.fromCharCode(characterGuessed));
-            noMatch = true;
+    if(arrayOfCount[characterGuessed-65] == 1) {
+        if (chancesUsed >= 6) {
+            location.replace("redirectIfLose.html");
         }
-    }
+        else{
+            let noMatch = false;
+    
+            for(let index=0; index<lengthOfString; index++) {
+                if (resultString.charCodeAt(index) === characterGuessed) {
+                   console.log(String.fromCharCode(characterGuessed));
+                   userString = userString.replaceAt(index, String.fromCharCode(characterGuessed));
+                   noMatch = true;
+                }
+            }
+            if (!noMatch) {
+                document.getElementById("hangmanState").src = imagesArray[imageCount];
+                imageCount++;
+                chancesUsed++;
+            }
+            var beauty = "";
+            for(index = 0;index<2*lengthOfString;index++){
+                if(index%2==0) beauty+=userString.charAt(index/2);
+                else beauty+=" ";
+            }
+            console.log("beauty="+beauty);
+            document.getElementById("guessedWord").innerHTML = beauty;//beautify(userString);
+            if (userString === resultString) {
+                location.replace("redirectIfWin.html");
+            }
+        }
 
-    if (!noMatch) {
-        document.getElementById("hangmanState").src = imagesArray[imageCount];
-        imageCount++;
-    }
 
-    document.getElementById("guessedWord").innerHTML = userString;//beautify(userString);
-    if (userString === resultString) {
-        location.replace("redirectIfWin.html");
     }
-
 }
 
 String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
-//     for(inn1 = 0;inn1<lengthOfString;inn1++){
-//         if(dashedString.charAt(inn1)!='_'){
-//             countOfChara++;
-//         } 
-//     }
-//     console.log("count of cha =  "+countOfChara);
-//     if(countOfChara==lengthOfString){
-//         //winning
-//         window.open("project14Play.html","_self");
-//     }
-//     else{
-//         if(count==6){
-//             //loosing
-//             // window.open("project14Play.html","_self");
-            
-//         }
-//         else{
-//             var booleanT = false;
-//             console.log("CLICKED CHARACTER IS = "+characterGuessed);
-            
-//             for(inn = 0;inn<lengthOfString;inn++){
-//                 if(resultString.charAt(inn)===characterGuessed){
-//                     var stringToArray = dashedString.split("");
-//                     stringToArray[inn] = characterGuessed;
-//                     dashedString = stringToArray.join("");
-//                     booleanT = true;
-//                     countOfChara++;
-//                 }
-//             }
-//             for(sundar = 0;sundar<lengthOfString;sundar++){
-//                 sunderStringFunc+= dashedString[sundar]+" ";
-//             }
-//             if(booleanT){
-//                 console.log(`the character ${characterGuessed} exist in the final sring AND SATUR OF CURREN STRING = ${dashedString}`);
-//                // document.getElementById("guessedWord").innerHTML = dashedString;
-//                 document.getElementById("guessedWord").innerHTML = sunderStringFunc;
-//                 document.getElementById(characterGuessed.toLowerCase(characterGuessed)).style.backgroundColor = "green";
-    
-//             }
-//             else{
-//                 console.log("the character you guessed does not exist AND CURRENT STATUS OF STRING IS = "+dashedString);
-//                     //document.getElementById("guessedWord").innerHTML = dashedString;
-//                     document.getElementById("guessedWord").innerHTML = sunderStringFunc;
-//                     document.getElementById(characterGuessed.toLowerCase(characterGuessed)).style.backgroundColor = "red";
-//                     count++;
-//                     console.log("count="+count+"  array="+imagesArray[count]);
-//                     document.getElementById("hangmanState").src = imagesArray[count];
-//             }
-//         }
-//     }
-    
-
-// }
